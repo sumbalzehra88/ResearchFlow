@@ -2,11 +2,40 @@ import * as fs from "fs";
 import * as path from "path";
 import { Notebook, PaperChunk, CitationFidelityResult, ResolvedCitation } from "../src/types";
 
-const DATA_DIR = path.join(process.cwd(), "data");
+const isVercel = process.env.VERCEL === "1" || !!process.env.VERCEL;
+export const DATA_DIR = isVercel ? path.join("/tmp", "data") : path.join(process.cwd(), "data");
+
+function copyFolderSync(from: string, to: string) {
+  if (!fs.existsSync(from)) return;
+  if (!fs.existsSync(to)) {
+    fs.mkdirSync(to, { recursive: true });
+  }
+  const elements = fs.readdirSync(from);
+  for (const element of elements) {
+    const fromPath = path.join(from, element);
+    const toPath = path.join(to, element);
+    if (fs.lstatSync(fromPath).isDirectory()) {
+      copyFolderSync(fromPath, toPath);
+    } else if (!fs.existsSync(toPath)) {
+      fs.copyFileSync(fromPath, toPath);
+    }
+  }
+}
 
 // Create data directory if it doesn't exist
 if (!fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
+// Clone workspace data/ assets to /tmp/data/ at startup on Vercel
+if (isVercel) {
+  const workspaceDataDir = path.join(process.cwd(), "data");
+  try {
+    copyFolderSync(workspaceDataDir, DATA_DIR);
+    console.log("[Vercel DB Init] Cloned data assets successfully to /tmp/data");
+  } catch (err: any) {
+    console.error("[Vercel DB Init] Error cloning data assets:", err.message);
+  }
 }
 
 const NOTEBOOKS_FILE = path.join(DATA_DIR, "notebooks.json");

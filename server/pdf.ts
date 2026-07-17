@@ -3,7 +3,7 @@ import * as path from "path";
 import { PDFParse } from "pdf-parse";
 import { ContentType, PaperChunk } from "../src/types";
 import { getEmbedding, extractVisualsFromPDF } from "./gemini";
-import { getPaperChunksWithVectors, savePaperChunksWithVectors, getVisualDescriptionFromCache, saveVisualDescriptionToCache } from "./db";
+import { getPaperChunksWithVectors, savePaperChunksWithVectors, getVisualDescriptionFromCache, saveVisualDescriptionToCache, DATA_DIR } from "./db";
 
 const HEADING_FONT_THRESHOLD = 11.5;
 
@@ -48,7 +48,7 @@ export async function processPDF(
   fileName: string
 ): Promise<number> {
   // Ensure we save the PDF file to disk for iframe/rendering use
-  const pdfsDir = path.join(process.cwd(), "data", "pdfs");
+  const pdfsDir = path.join(DATA_DIR, "pdfs");
   if (!fs.existsSync(pdfsDir)) {
     fs.mkdirSync(pdfsDir, { recursive: true });
   }

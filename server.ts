@@ -10,6 +10,7 @@ import {
   getNotebook,
   saveNotebook,
   getPaperChunksWithVectors,
+  DATA_DIR,
 } from "./server/db";
 import { processPDF, retrieveChunks } from "./server/pdf";
 import {
@@ -31,7 +32,7 @@ import {
 import { Notebook, Paper, ChatMessage, AuditTrailEntry, CitationFidelityResult, Report, ContentType, ResolvedCitation, PaperChunk } from "./src/types";
 
 async function downloadPreloadedPapers() {
-  const pdfsDir = path.join(process.cwd(), "data", "pdfs");
+  const pdfsDir = path.join(DATA_DIR, "pdfs");
   if (!fs.existsSync(pdfsDir)) {
     fs.mkdirSync(pdfsDir, { recursive: true });
   }
@@ -54,19 +55,28 @@ async function downloadPreloadedPapers() {
   }
 }
 
-async function startServer() {
-  // Ensure preloaded papers are present
-  downloadPreloadedPapers().catch((err) => console.error("Error downloading preloaded paper:", err));
+// Ensure preloaded papers are present
+downloadPreloadedPapers().catch((err) => console.error("Error downloading preloaded paper:", err));
 
-  const app = express();
-  const PORT = 3000;
+const app = express();
+const PORT = 3000;
 
-  // JSON and UrlEncoded parsers
-  app.use(express.json({ limit: "50mb" }));
-  app.use(express.urlencoded({ limit: "50mb", extended: true }));
+// JSON and UrlEncoded parsers
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
-  // Multer config for file uploads in memory
-  const upload = multer({ storage: multer.memoryStorage() });
+// Normalize URL paths for Vercel serverless function routing
+app.use((req, res, next) => {
+  if (!req.url.startsWith("/api")) {
+    const [pathPart, queryPart] = req.url.split("?");
+    req.url = queryPart ? `/api${pathPart}?${queryPart}` : `/api${pathPart}`;
+    console.log(`[Vercel Route Rewrite] Normalized req.url from original to: ${req.url}`);
+  }
+  next();
+});
+
+// Multer config for file uploads in memory
+const upload = multer({ storage: multer.memoryStorage() });
 
   // ---------------------------------------------------------
   // API Routes
@@ -420,7 +430,7 @@ async function startServer() {
   app.get("/api/papers/:paperId/pdf", (req, res) => {
     try {
       const { paperId } = req.params;
-      const pdfPath = path.join(process.cwd(), "data", "pdfs", `${paperId}.pdf`);
+      const pdfPath = path.join(DATA_DIR, "pdfs", `${paperId}.pdf`);
       if (fs.existsSync(pdfPath)) {
         res.setHeader("Content-Type", "application/pdf");
         res.setHeader("Content-Disposition", "inline");
@@ -641,12 +651,15 @@ async function startServer() {
 
   // Vite Integration for dev mode, asset serving in production
   if (process.env.NODE_ENV !== "production") {
-    const vite = await createViteServer({
+    createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
+    }).then((vite) => {
+      app.use(vite.middlewares);
+      console.log("Vite middleware mounted in development mode.");
+    }).catch((err) => {
+      console.error("Failed to start Vite middleware:", err);
     });
-    app.use(vite.middlewares);
-    console.log("Vite middleware mounted in development mode.");
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
@@ -656,11 +669,10 @@ async function startServer() {
     console.log(`Serving static production build from ${distPath}`);
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
-}
+  if (!process.env.VERCEL) {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  }
 
-startServer().catch((err) => {
-  console.error("Fatal error starting server:", err);
-});
+export default app;
