@@ -54,8 +54,7 @@ async function downloadPreloadedPapers() {
   }
 }
 
-// Ensure preloaded papers are present
-downloadPreloadedPapers().catch((err) => console.error("Error downloading preloaded paper:", err));
+// downloadPreloadedPapers is called inside startServer() below
 
 const app = express();
 const PORT = 3000;
@@ -638,34 +637,47 @@ const upload = multer({ storage: multer.memoryStorage() });
     }
   });
 
-  // Vite Integration for dev mode, asset serving in production
-  if (process.env.NODE_ENV !== "production") {
-    import("vite").then(({ createServer: createViteServer }) => {
-      createViteServer({
-        server: { middlewareMode: true },
-        appType: "spa",
-      }).then((vite) => {
+  async function startServer() {
+    // Ensure preloaded papers are present
+    await downloadPreloadedPapers().catch((err) => console.error("Error downloading preloaded paper:", err));
+
+    // Vite Integration for dev mode, asset serving in production
+    if (process.env.NODE_ENV !== "production") {
+      try {
+        const { createServer: createViteServer } = await import("vite");
+        const vite = await createViteServer({
+          server: { middlewareMode: true },
+          appType: "spa",
+        });
         app.use(vite.middlewares);
         console.log("Vite middleware mounted in development mode.");
-      }).catch((err) => {
+      } catch (err) {
         console.error("Failed to start Vite middleware:", err);
+      }
+    } else {
+      const distPath = path.join(process.cwd(), "dist");
+      app.use(express.static(distPath));
+      app.get("*", (req, res) => {
+        if (req.path.startsWith("/api/")) {
+          return res.status(404).json({ error: "API route not found" });
+        }
+        const indexPath = path.join(distPath, "index.html");
+        if (fs.existsSync(indexPath)) {
+          res.sendFile(indexPath);
+        } else {
+          res.status(404).send("Not found");
+        }
       });
-    }).catch((err) => {
-      console.error("Failed to dynamically import vite:", err);
-    });
-  } else {
-    const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
-    console.log(`Serving static production build from ${distPath}`);
+      console.log(`Serving static production build from ${distPath}`);
+    }
+
+    if (!process.env.VERCEL) {
+      app.listen(PORT, "0.0.0.0", () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+      });
+    }
   }
 
-  if (!process.env.VERCEL) {
-    app.listen(PORT, "0.0.0.0", () => {
-      console.log(`Server running on http://localhost:${PORT}`);
-    });
-  }
+  startServer();
 
 export default app;
