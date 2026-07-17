@@ -63,6 +63,33 @@ const PORT = 3000;
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
+// Normalize URL paths for Vercel serverless function routing
+app.use((req, res, next) => {
+  const originalUrl = req.url;
+  
+  // Vercel serverless function routing prefix cleanups
+  if (req.url.startsWith("/api/index.ts")) {
+    req.url = req.url.substring("/api/index.ts".length);
+  } else if (req.url.startsWith("/api/index.js")) {
+    req.url = req.url.substring("/api/index.js".length);
+  } else if (req.url.startsWith("/api/index")) {
+    req.url = req.url.substring("/api/index".length);
+  }
+  
+  // If the URL does not start with /api, but original URL or path suggests it should be
+  if (!req.url.startsWith("/api") && (originalUrl.includes("/api/") || req.originalUrl?.includes("/api/"))) {
+    req.url = "/api" + (req.url.startsWith("/") ? req.url : "/" + req.url);
+  }
+  
+  // Strip duplicate slashes if any
+  req.url = req.url.replace(/\/+/g, "/");
+  
+  if (originalUrl !== req.url) {
+    console.log(`[Vercel Route Normalize] Rewrote req.url from "${originalUrl}" to "${req.url}"`);
+  }
+  next();
+});
+
 // Multer config for file uploads in memory
 const upload = multer({ storage: multer.memoryStorage() });
 

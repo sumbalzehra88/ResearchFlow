@@ -1,0 +1,299 @@
+[
+  {
+    "id": "nb_m5k01eabo",
+    "name": "Attention is all you need",
+    "createdAt": "2026-07-17T15:18:42.012Z",
+    "papers": [
+      {
+        "id": "paper_4xjeadbm4",
+        "title": "attention is all you need",
+        "filename": "attention_is_all_you_need.pdf",
+        "totalPages": 15,
+        "uploadedAt": "2026-07-17T15:20:35.857Z",
+        "citationResolved": false,
+        "citations": [
+          {
+            "id": "cited_mprmx3mjv",
+            "title": "Layer normalization",
+            "authors": "Jimmy Lei Ba, Jamie Ryan Kiros, and Geoffrey E Hinton",
+            "year": 2016,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[1]"
+          },
+          {
+            "id": "cited_mysswnlgq",
+            "title": "Neural machine translation by jointly learning to align and translate",
+            "authors": "Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio",
+            "year": 2014,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[2]"
+          },
+          {
+            "id": "cited_koq4p88b0",
+            "title": "Recurrent neural network grammars",
+            "authors": "Chris Dyer, Adhiguna Kuncoro, Miguel Ballesteros, and Noah A. Smith",
+            "year": 2016,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[8]"
+          },
+          {
+            "id": "cited_71l9vsb1b",
+            "title": "Deep residual learning for image recognition",
+            "authors": "Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun",
+            "year": 2016,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[11]"
+          },
+          {
+            "id": "cited_qifqju20z",
+            "title": "Long short-term memory",
+            "authors": "Sepp Hochreiter and Jürgen Schmidhuber",
+            "year": 1997,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[13]"
+          },
+          {
+            "id": "cited_yd3x0gv0p",
+            "title": "Self-training PCFG grammars with latent annotations across languages",
+            "authors": "Zhongqiang Huang and Mary Harper",
+            "year": 2009,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[14]"
+          },
+          {
+            "id": "cited_5cays5z86",
+            "title": "Neural GPUs learn algorithms",
+            "authors": "Łukasz Kaiser and Ilya Sutskever",
+            "year": 2016,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[17]"
+          },
+          {
+            "id": "cited_lgthib69u",
+            "title": "Adam: A method for stochastic optimization",
+            "authors": "Diederik Kingma and Jimmy Ba",
+            "year": 2015,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[20]"
+          },
+          {
+            "id": "cited_ua383intm",
+            "title": "Multi-task sequence to sequence learning",
+            "authors": "Minh-Thang Luong, Quoc V. Le, Ilya Sutskever, Oriol Vinyals, and Lukasz Kaiser",
+            "year": 2015,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[23]"
+          },
+          {
+            "id": "cited_4nfjfcf0l",
+            "title": "Effective self-training for parsing",
+            "authors": "David McClosky, Eugene Charniak, and Mark Johnson",
+            "year": 2006,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[26]"
+          },
+          {
+            "id": "cited_aqgv2266i",
+            "title": "A decomposable attention model",
+            "authors": "Ankur Parikh, Oscar Täckström, Dipanjan Das, and Jakob Uszkoreit",
+            "year": 2016,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[27]"
+          },
+          {
+            "id": "cited_6ory024s6",
+            "title": "Learning accurate, compact, and interpretable tree annotation",
+            "authors": "Slav Petrov, Leon Barrett, Romain Thibaux, and Dan Klein",
+            "year": 2006,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[29]"
+          },
+          {
+            "id": "cited_loqat7fra",
+            "title": "Neural machine translation of rare words with subword units",
+            "authors": "Rico Sennrich, Barry Haddow, and Alexandra Birch",
+            "year": 2015,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[31]"
+          },
+          {
+            "id": "cited_o2enobwu3",
+            "title": "Dropout: a simple way to prevent neural networks from overfitting",
+            "authors": "Nitish Srivastava, Geoffrey E Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan Salakhutdinov",
+            "year": 2014,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[33]"
+          },
+          {
+            "id": "cited_blixdxgoe",
+            "title": "Grammar as a foreign language",
+            "authors": "Oriol Vinyals, Łukasz Kaiser, Terry Koo, Slav Petrov, Ilya Sutskever, and Geoffrey Hinton",
+            "year": 2014,
+            "hopDepth": 1,
+            "status": "pending",
+            "citationKey": "[37]"
+          }
+        ]
+      }
+    ],
+    "chatHistory": [
+      {
+        "id": "msg_i686zwbcq",
+        "role": "user",
+        "text": "what is attention with diagram?",
+        "timestamp": "2026-07-17T15:21:19.316Z",
+        "complexity": "dense",
+        "jargon": "hover"
+      },
+      {
+        "id": "msg_v9hv6hdzq",
+        "role": "assistant",
+        "text": "```mermaid\ngraph TD\n    A[\"Input Queries (Q)\"] --> D[\"Scaled Dot-Product Attention\"]\n    B[\"Input Keys (K)\"] --> D\n    C[\"Input Values (V)\"] --> D\n    D --> E[\"Softmax(QKᵀ / √dk)\"]\n    E --> F[\"Weighted Sum of Values (V)\"]\n    \n    subgraph \"Multi-Head Attention\"\n    G[\"Linear Projection (W_Q)\"]\n    H[\"Linear Projection (W_K)\"]\n    I[\"Linear Projection (W_V)\"]\n    J[\"Attention Head 1\"]\n    K[\"Attention Head h\"]\n    L[\"Concatenation & Linear Projection (W_O)\"]\n    end\n    \n    A --> G\n    B --> H\n    C --> I\n    G --> J\n    H --> J\n    I --> J\n    G --> K\n    H --> K\n    I --> K\n    J --> L\n    K --> L\n```\n\n$$ \\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V $$\n\nThe attention mechanism is defined as a process where the model computes a weighted sum of values, where the weight assigned to each value is determined by a compatibility function of the query with the corresponding key [Source #2]. \n\n### Scaled Dot-Product Attention\nThe specific implementation utilized in the source paper is termed \"Scaled Dot-Product Attention\" [Source #2]. The input consists of queries and keys of dimension $d_k$, and values of dimension $d_v$ [Source #2, Source #3]. The mechanism computes the dot products of the query with all keys, scales these products by dividing by $\\sqrt{d_k}$, and applies a <term definition=\"a function that converts a vector of numbers into a probability distribution\">softmax</term> function to derive the weights for the values [Source #3]. \n\nThe scaling factor of $1/\\sqrt{d_k}$ is critical; the source paper posits that for large values of $d_k$, dot products grow large in magnitude, which pushes the softmax function into regions where it exhibits extremely small gradients [Source #5]. While additive attention [Bahdanau et al., 2014] performs similarly to dot-product attention for small $d_k$, the source paper notes that dot-product attention is significantly faster and more space-efficient due to the utilization of highly optimized matrix multiplication code [Source #1, Source #5]. Note: The findings regarding additive attention [Bahdanau et al., 2014] are verified solely from abstract metadata as the full text was not available for ingestion.\n\n### Multi-Head Attention\nTo allow the model to jointly attend to information from different representation subspaces at different positions, the architecture employs Multi-Head Attention [Source #4]. This mechanism runs several attention layers in parallel [Source #2]. The outputs of these heads are concatenated and projected to produce the final values [Source #4]:\n\n$$ \\text{MultiHead}(Q, K, V) = \\text{Concat}(\\text{head}_1, ..., \\text{head}_h)W^O $$\n\nWhere each head is defined as:\n$$ \\text{head}_i = \\text{Attention}(QW_i^Q, KW_i^K, VW_i^V) $$\n\nIn this formulation, $W_i^Q \\in \\mathbb{R}^{d_{model} \\times d_k}$, $W_i^K \\in \\mathbb{R}^{d_{model} \\times d_k}$, $W_i^V \\in \\mathbb{R}^{d_{model} \\times d_v}$, and $W^O \\in \\mathbb{R}^{hd_v \\times d_{model}}$ are parameter matrices [Source #4].",
+        "timestamp": "2026-07-17T15:22:34.897Z",
+        "sources": [
+          {
+            "paperId": "paper_4xjeadbm4",
+            "paperTitle": "attention is all you need",
+            "page": 4,
+            "contentType": "text",
+            "text": "as:\nAttention(Q, K, V ) = softmax( QKT\n√dk\n)V (1)\nThe two most commonly used attention functions are additive attention [ 2], and dot-product (multi-\nplicative) attention. Dot-product attention is identical to our algorithm, except for the scaling factor\nof 1\t√dk\n. Additive attention computes the compatibility function using a feed-forward network with\na single hidden layer. While the two are similar in theoretical complexity, dot-product attention is"
+          },
+          {
+            "paperId": "paper_4xjeadbm4",
+            "paperTitle": "attention is all you need",
+            "page": 4,
+            "contentType": "text",
+            "text": "Scaled Dot-Product Attention Multi-Head Attention\nFigure 2: (left) Scaled Dot-Product Attention. (right) Multi-Head Attention consists of several\nattention layers running in parallel.\nof the values, where the weight assigned to each value is computed by a compatibility function of the\nquery with the corresponding key.\n3.2.1 Scaled Dot-Product Attention\nWe call our particular attention \"Scaled Dot-Product Attention\" (Figure 2). The input consists of\nqueries and keys of dimension dk, and values of dimension dv ."
+          },
+          {
+            "paperId": "paper_4xjeadbm4",
+            "paperTitle": "attention is all you need",
+            "page": 4,
+            "contentType": "text",
+            "text": "keys of dimension dk, and values of dimension dv . We compute the dot products of the\nquery with all keys, divide each by √dk, and apply a softmax function to obtain the weights on the\nvalues.\nIn practice, we compute the attention function on a set of queries simultaneously, packed together\ninto a matrix Q. The keys and values are also packed together into matrices K and V . We compute\nthe matrix of outputs as:\nAttention(Q, K, V ) = softmax( QKT\n√dk\n)V (1)"
+          },
+          {
+            "paperId": "paper_4xjeadbm4",
+            "paperTitle": "attention is all you need",
+            "page": 5,
+            "contentType": "text",
+            "text": "output values. These are concatenated and once again projected, resulting in the final values, as\ndepicted in Figure 2.\nMulti-head attention allows the model to jointly attend to information from different representation\nsubspaces at different positions. With a single attention head, averaging inhibits this.\nMultiHead(Q, K, V ) = Concat(head1, ..., headh)W O\nwhere headi = Attention(QW Q\ni , KW K\ni , V W V\ni )\nWhere the projections are parameter matrices W Q\ni ∈ Rdmodel×dk , W K\ni ∈ Rdmodel×dk , W V\ni ∈ Rdmodel×dv\nand W O ∈ Rhdv ×dmodel ."
+          },
+          {
+            "paperId": "paper_4xjeadbm4",
+            "paperTitle": "attention is all you need",
+            "page": 4,
+            "contentType": "text",
+            "text": "theoretical complexity, dot-product attention is\nmuch faster and more space-efficient in practice, since it can be implemented using highly optimized\nmatrix multiplication code.\nWhile for small values of dk the two mechanisms perform similarly, additive attention outperforms\ndot product attention without scaling for larger values of dk [3 ]. We suspect that for large values of\ndk, the dot products grow large in magnitude, pushing the softmax function into regions where it has\nextremely small gradients 4."
+          },
+          {
+            "paperId": "paper_4xjeadbm4",
+            "paperTitle": "attention is all you need",
+            "page": 2,
+            "contentType": "text",
+            "text": "rough factorization tricks [ 21 ] and conditional\ncomputation [ 32 ], while also improving model performance in case of the latter. The fundamental\nconstraint of sequential computation, however, remains.\nAttention mechanisms have become an integral part of compelling sequence modeling and transduc-\ntion models in various tasks, allowing modeling of dependencies without regard to their distance in\nthe input or output sequences [ 2, 19 ]. In all but a few cases [ 27 ], however, such attention mechanisms"
+          }
+        ],
+        "complexity": "dense",
+        "jargon": "hover"
+      }
+    ],
+    "auditTrail": [],
+    "reports": [],
+    "fidelityResults": []
+  },
+  {
+    "id": "nb_agh1v8rbs",
+    "name": "attention",
+    "createdAt": "2026-07-17T16:14:23.265Z",
+    "papers": [],
+    "chatHistory": [],
+    "auditTrail": [],
+    "reports": [],
+    "fidelityResults": []
+  },
+  {
+    "id": "nb_bcl9ll4kd",
+    "name": "attention",
+    "createdAt": "2026-07-17T16:14:23.766Z",
+    "papers": [],
+    "chatHistory": [],
+    "auditTrail": [],
+    "reports": [],
+    "fidelityResults": []
+  },
+  {
+    "id": "nb_vudb2pl1p",
+    "name": "attention",
+    "createdAt": "2026-07-17T16:14:24.724Z",
+    "papers": [],
+    "chatHistory": [],
+    "auditTrail": [],
+    "reports": [],
+    "fidelityResults": []
+  },
+  {
+    "id": "nb_ddwi73fuk",
+    "name": "attention",
+    "createdAt": "2026-07-17T16:14:24.727Z",
+    "papers": [],
+    "chatHistory": [],
+    "auditTrail": [],
+    "reports": [],
+    "fidelityResults": []
+  },
+  {
+    "id": "nb_6tk8q7s3f",
+    "name": "attention",
+    "createdAt": "2026-07-17T16:41:16.480Z",
+    "papers": [],
+    "chatHistory": [],
+    "auditTrail": [],
+    "reports": [],
+    "fidelityResults": []
+  },
+  {
+    "id": "nb_6nz2mh5gl",
+    "name": "attention",
+    "createdAt": "2026-07-17T16:53:22.368Z",
+    "papers": [],
+    "chatHistory": [],
+    "auditTrail": [],
+    "reports": [],
+    "fidelityResults": []
+  },
+  {
+    "id": "nb_wc84z9y86",
+    "name": "Test Notebook",
+    "createdAt": "2026-07-17T16:58:10.804Z",
+    "papers": [],
+    "chatHistory": [],
+    "auditTrail": [],
+    "reports": [],
+    "fidelityResults": []
+  },
+  {
+    "id": "nb_piecodv9t",
+    "name": "Verified Notebook",
+    "createdAt": "2026-07-17T17:00:05.344Z",
+    "papers": [],
+    "chatHistory": [],
+    "auditTrail": [],
+    "reports": [],
+    "fidelityResults": []
+  }
+]

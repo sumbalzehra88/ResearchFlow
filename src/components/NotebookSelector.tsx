@@ -54,9 +54,14 @@ export default function NotebookSelector({ activeNotebook, onSelect }: Props) {
         setNewNotebookName("");
         setIsCreating(false);
         setIsOpen(false);
+      } else {
+        const errorText = await res.text();
+        console.error("Failed to create notebook:", errorText);
+        alert(`Failed to create notebook: ${errorText || res.statusText}`);
       }
     } catch (e) {
       console.error("Failed to create notebook", e);
+      alert(`Error creating notebook: ${e instanceof Error ? e.message : String(e)}`);
     }
   };
 
