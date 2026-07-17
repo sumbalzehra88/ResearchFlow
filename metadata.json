@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Research Paper Deep-Research Assistant",
+  "description": "An academic paper reading and deep-research workbench that extracts figures/tables via Gemini vision, queries Semantic Scholar for citation tracing, runs citation fidelity factual fact-checking, and generates grounded literature review and executive reports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
