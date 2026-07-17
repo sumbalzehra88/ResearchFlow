@@ -3,7 +3,6 @@ import path from "path";
 import * as fs from "fs";
 import multer from "multer";
 import axios from "axios";
-import { createServer as createViteServer } from "vite";
 import {
   getNotebooks,
   saveNotebooks,
@@ -64,16 +63,6 @@ const PORT = 3000;
 // JSON and UrlEncoded parsers
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-
-// Normalize URL paths for Vercel serverless function routing
-app.use((req, res, next) => {
-  if (!req.url.startsWith("/api")) {
-    const [pathPart, queryPart] = req.url.split("?");
-    req.url = queryPart ? `/api${pathPart}?${queryPart}` : `/api${pathPart}`;
-    console.log(`[Vercel Route Rewrite] Normalized req.url from original to: ${req.url}`);
-  }
-  next();
-});
 
 // Multer config for file uploads in memory
 const upload = multer({ storage: multer.memoryStorage() });
@@ -651,14 +640,18 @@ const upload = multer({ storage: multer.memoryStorage() });
 
   // Vite Integration for dev mode, asset serving in production
   if (process.env.NODE_ENV !== "production") {
-    createViteServer({
-      server: { middlewareMode: true },
-      appType: "spa",
-    }).then((vite) => {
-      app.use(vite.middlewares);
-      console.log("Vite middleware mounted in development mode.");
+    import("vite").then(({ createServer: createViteServer }) => {
+      createViteServer({
+        server: { middlewareMode: true },
+        appType: "spa",
+      }).then((vite) => {
+        app.use(vite.middlewares);
+        console.log("Vite middleware mounted in development mode.");
+      }).catch((err) => {
+        console.error("Failed to start Vite middleware:", err);
+      });
     }).catch((err) => {
-      console.error("Failed to start Vite middleware:", err);
+      console.error("Failed to dynamically import vite:", err);
     });
   } else {
     const distPath = path.join(process.cwd(), "dist");
